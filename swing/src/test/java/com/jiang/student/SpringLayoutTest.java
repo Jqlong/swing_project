@@ -16,7 +16,7 @@ public class SpringLayoutTest extends JFrame {
     SpringLayout springLayout = new SpringLayout();
     JPanel jPanel = new JPanel(springLayout);
 
-    JLabel jLabel = new JLabel("文章标题");
+    JLabel titleLabel = new JLabel("文章标题");
     JTextField titleText = new JFormattedTextField();
     JLabel author = new JLabel("作者：");
     JTextField name = new JFormattedTextField();
@@ -29,19 +29,34 @@ public class SpringLayoutTest extends JFrame {
         Container container = getContentPane();
 
         //添加组件
-        jPanel.add(jLabel);
-        jPanel.add(titleText);
-        jPanel.add(author);
-        jPanel.add(name);
-        jPanel.add(contLabel);
-        jPanel.add(contentLabel);
+        jPanel.add(titleLabel);
+//        jPanel.add(titleText);
+//        jPanel.add(author);
+//        jPanel.add(name);
+//        jPanel.add(contLabel);
+//        jPanel.add(contentLabel);
+
+        /**
+         * SpringLayout:布局管理器
+         * SpringLayout.Constraints:使用弹簧布局的容器里面的组件的布局约束，每个组件对应一个
+         * Spring:可以理解为一个能够进行四则运算的整数
+         */
+        SpringLayout.Constraints titleLabelC = springLayout.getConstraints(titleLabel);
+        titleLabelC.setX(Spring.constant(80));
+        titleLabelC.setY(Spring.constant(50));
+
+        //设置标题文本框
+        SpringLayout.Constraints titleTextCon = springLayout.getConstraints(titleText);
+//        titleTextCon.setConstraint();
+//        titleTextCon.setX();
+
         container.add(jPanel);
 
         URL resource = SpringLayoutTest.class.getClassLoader().getResource("background.png");
         Image image = new ImageIcon(resource).getImage();
         setIconImage(image);
 
-        setSize(400, 200);
+        setSize(400, 400);
         setLocationRelativeTo(null); //居中
         setResizable(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
