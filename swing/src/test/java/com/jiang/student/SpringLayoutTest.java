@@ -25,12 +25,15 @@ public class SpringLayoutTest extends JFrame {
 
 
     public SpringLayoutTest(){
-
+        super("弹簧布局SpringLayout");
         Container container = getContentPane();
 
         //添加组件
         jPanel.add(titleLabel);
-//        jPanel.add(titleText);
+        //设置大小
+        titleText.setPreferredSize(new Dimension(200, 20));
+        jPanel.add(titleText);
+        author.setPreferredSize(new Dimension(200, 30));
 //        jPanel.add(author);
 //        jPanel.add(name);
 //        jPanel.add(contLabel);
@@ -45,10 +48,30 @@ public class SpringLayoutTest extends JFrame {
         titleLabelC.setX(Spring.constant(80));
         titleLabelC.setY(Spring.constant(50));
 
+
+        /*
+            设置约束的一种方法，比较复杂
+         */
         //设置标题文本框
+        //titleText西边距离label的东边
         SpringLayout.Constraints titleTextCon = springLayout.getConstraints(titleText);
 //        titleTextCon.setConstraint();
 //        titleTextCon.setX();
+
+        Spring constraint = titleLabelC.getConstraint(SpringLayout.EAST);
+        titleTextCon.setConstraint(SpringLayout.WEST,Spring.sum(constraint,Spring.constant(20)));
+        //设置北边 值一样
+        titleTextCon.setConstraint(SpringLayout.NORTH,titleLabelC.getConstraint(SpringLayout.NORTH));
+
+        /*
+            设置约束的第二种写法，比价简单
+            e1：要设置组建的哪个边界
+            c1：要设置的组件
+            pad：距离值
+            e2：参照的组件的边界名
+            c2：参照物（组件）
+         */
+        springLayout.putConstraint();
 
         container.add(jPanel);
 
