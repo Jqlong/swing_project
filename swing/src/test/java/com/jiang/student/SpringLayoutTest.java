@@ -17,9 +17,9 @@ public class SpringLayoutTest extends JFrame {
     JPanel jPanel = new JPanel(springLayout);
 
     JLabel titleLabel = new JLabel("文章标题");
-    JTextField titleText = new JFormattedTextField();
-    JLabel author = new JLabel("作者：");
-    JTextField name = new JFormattedTextField();
+    JTextField titleText = new JTextField();
+    JLabel authorLabel = new JLabel("作者：");
+    JTextField authorText = new JTextField();
     JLabel contentLabel = new JLabel("请输入内容：");
     JTextArea contLabel = new JTextArea(4, 10);
 
@@ -31,9 +31,11 @@ public class SpringLayoutTest extends JFrame {
         //添加组件
         jPanel.add(titleLabel);
         //设置大小
-        titleText.setPreferredSize(new Dimension(200, 20));
+        titleText.setPreferredSize(new Dimension(150, 20));
         jPanel.add(titleText);
-        author.setPreferredSize(new Dimension(200, 30));
+        jPanel.add(authorText);
+        authorText.setPreferredSize(new Dimension(150, 20));
+        jPanel.add(authorLabel);
 //        jPanel.add(author);
 //        jPanel.add(name);
 //        jPanel.add(contLabel);
@@ -63,6 +65,7 @@ public class SpringLayoutTest extends JFrame {
         //设置北边 值一样
         titleTextCon.setConstraint(SpringLayout.NORTH,titleLabelC.getConstraint(SpringLayout.NORTH));
 
+
         /*
             设置约束的第二种写法，比价简单
             e1：要设置组建的哪个边界
@@ -71,7 +74,14 @@ public class SpringLayoutTest extends JFrame {
             e2：参照的组件的边界名
             c2：参照物（组件）
          */
-        springLayout.putConstraint();
+        //设置作者Label:authorLabel ，东边对齐
+        springLayout.putConstraint(SpringLayout.EAST,authorLabel,0,SpringLayout.EAST,titleLabel);
+        springLayout.putConstraint(SpringLayout.NORTH,authorLabel,20,SpringLayout.NORTH,titleLabel);
+        //设置name
+        springLayout.putConstraint(SpringLayout.WEST,authorText,20,SpringLayout.EAST,authorLabel);
+        springLayout.putConstraint(SpringLayout.NORTH,authorText,0,SpringLayout.NORTH,authorLabel);
+
+
 
         container.add(jPanel);
 
