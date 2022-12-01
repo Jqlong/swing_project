@@ -21,7 +21,7 @@ public class SpringLayoutTest extends JFrame {
     JLabel authorLabel = new JLabel("作者：");
     JTextField authorText = new JTextField();
     JLabel contentLabel = new JLabel("请输入内容：");
-    JTextArea contLabel = new JTextArea(4, 10);
+    JTextArea contText = new JTextArea(4, 10);
 
 
     public SpringLayoutTest(){
@@ -36,6 +36,10 @@ public class SpringLayoutTest extends JFrame {
         jPanel.add(authorText);
         authorText.setPreferredSize(new Dimension(150, 20));
         jPanel.add(authorLabel);
+        jPanel.add(contentLabel);
+        jPanel.add(contText);
+        contText.setPreferredSize(new Dimension(150, 50));
+        jPanel.setBackground(Color.BLUE);
 //        jPanel.add(author);
 //        jPanel.add(name);
 //        jPanel.add(contLabel);
@@ -74,12 +78,20 @@ public class SpringLayoutTest extends JFrame {
             e2：参照的组件的边界名
             c2：参照物（组件）
          */
-        //设置作者Label:authorLabel ，东边对齐
+        //设置作者Label:authorLabel ，东边和titleLabel对齐，北边距离titleLabel南边20px
         springLayout.putConstraint(SpringLayout.EAST,authorLabel,0,SpringLayout.EAST,titleLabel);
-        springLayout.putConstraint(SpringLayout.NORTH,authorLabel,20,SpringLayout.NORTH,titleLabel);
-        //设置name
+        springLayout.putConstraint(SpringLayout.NORTH,authorLabel,30,SpringLayout.NORTH,titleLabel);
+        //设置authorText
         springLayout.putConstraint(SpringLayout.WEST,authorText,20,SpringLayout.EAST,authorLabel);
         springLayout.putConstraint(SpringLayout.NORTH,authorText,0,SpringLayout.NORTH,authorLabel);
+
+        //设置内容label,东边和titleLabel对齐,北边距离authorLabel20px
+        springLayout.putConstraint(SpringLayout.EAST,contentLabel,0,SpringLayout.EAST,titleLabel);
+        springLayout.putConstraint(SpringLayout.NORTH,contentLabel,30,SpringLayout.NORTH,authorLabel);
+        //设置内容text
+        springLayout.putConstraint(SpringLayout.WEST,contText,20,SpringLayout.EAST,contentLabel);
+        springLayout.putConstraint(SpringLayout.NORTH,contText,0,SpringLayout.NORTH,contentLabel);
+
 
 
 
