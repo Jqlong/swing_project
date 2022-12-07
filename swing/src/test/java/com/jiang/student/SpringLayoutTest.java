@@ -45,13 +45,22 @@ public class SpringLayoutTest extends JFrame {
 //        jPanel.add(contLabel);
 //        jPanel.add(contentLabel);
 
+        Spring titleLabelWidth = Spring.width(titleLabel);
+        Spring titleTextWidth = Spring.width(titleText);
+        Spring spaceWidth = Spring.constant(20);
+        Spring childWidth = Spring.sum(Spring.sum(titleLabelWidth, titleTextWidth), spaceWidth);
+        int offset = childWidth.getValue() / 2;
+
+
         /**
          * SpringLayout:布局管理器
          * SpringLayout.Constraints:使用弹簧布局的容器里面的组件的布局约束，每个组件对应一个
          * Spring:可以理解为一个能够进行四则运算的整数
          */
         SpringLayout.Constraints titleLabelC = springLayout.getConstraints(titleLabel);
-        titleLabelC.setX(Spring.constant(80));
+        //titleLabelC.setX(Spring.constant(80));
+        //水平居中
+        springLayout.putConstraint(SpringLayout.WEST, titleLabel, -offset, SpringLayout.HORIZONTAL_CENTER, jPanel);
         titleLabelC.setY(Spring.constant(50));
 
 
@@ -91,7 +100,9 @@ public class SpringLayoutTest extends JFrame {
         //设置内容text
         springLayout.putConstraint(SpringLayout.WEST,contText,20,SpringLayout.EAST,contentLabel);
         springLayout.putConstraint(SpringLayout.NORTH,contText,0,SpringLayout.NORTH,contentLabel);
-
+        //设置内容text南北
+        springLayout.putConstraint(SpringLayout.SOUTH, contText, -20, SpringLayout.SOUTH, jPanel);
+        springLayout.putConstraint(SpringLayout.EAST, contText, -20, SpringLayout.EAST, jPanel);
 
 
 
